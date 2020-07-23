@@ -4,8 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Prime Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    
+    <div id="login-area">
+        <h1 class="text-center">Welcome To New Prime Bank</h1>
+        <div class="submit-area">
+            <h4>LOGIN</h4>
+            <input class="form-control" placeholder="Enter Your Email" type="text">
+            <br>
+            <input class="form-control" placeholder="Enter Your password" type="password" name="" id="">
+            <br>
+            <button id="enter" class="btn btn-success">Enter</button>
+            
+        </div>
+    </div>
+    <div id="trans-area">
+        <h1 class="text-center">Transaction Area </h1>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+               <div class="deposit status">
+                <h5>Deposit</h5>
+                <h2>$ <span id="current-deposit">00</span></h2>
+               </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="current-withdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                     <h2>$ <span id="current-balance">1240</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <input id="deposit-amount" type="text" class="form-control" placeholder="$ amount you want to deposit">
+                    <br>
+                    <button id="btn-deposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                    <input id="withdraw-amount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <br>
+                    <button id="withdraw-button" class="btn btn-success">Withdraw </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // enter button event handler
+       var button  = document.getElementById('enter');
+       button.addEventListener('click', function(){
+           document.getElementById('login-area').style.display = 'none';
+           document.getElementById('trans-area').style.display = 'block';
+       })
+        // deposit button event handler
+        // deposit part 
+        var   depositBtn = document.getElementById('btn-deposit');
+        depositBtn.addEventListener("click", function(){
+          var  depositAmount = document.getElementById('deposit-amount').value;
+           var depositAmountNumber = parseFloat(depositAmount);
+
+           var currentDeposit = document.getElementById('current-deposit').innerText;
+           var currentDepositNumber = parseFloat(currentDeposit);
+           var totalDeposit = depositAmountNumber + currentDepositNumber;
+
+           document.getElementById('current-deposit').innerText = totalDeposit;
+            // balancing the balance part 
+           var currentBalance = document.getElementById('current-balance').innerText;
+           var currentBalanceNumber = parseFloat(currentBalance);
+           var totalBalance = depositAmountNumber + currentBalanceNumber;
+           document.getElementById('current-balance').innerText = totalBalance;
+            // cleaning the input field 
+           document.getElementById('deposit-amount').value = '';
+        })
+        //    withdraw button event handler
+            // withdraw part 
+            // capturing the withdraw button and adding click event 
+           var withdrawButton = document.getElementById('withdraw-button');
+           withdrawButton.addEventListener('click', function(){
+            //    capturing the withdraw value from input field and converting into number 
+            var withdrawAmount = document.getElementById('withdraw-amount').value;
+            var withdrawAmountNumber = parseFloat(withdrawAmount);
+            // capturing the previous withdraw value and converting into number 
+            var currentWithdraw = document.getElementById('current-withdraw').innerText;
+            var currentWithdrawNumber = parseFloat(currentWithdraw);
+            // adding entered withdraw value and previous value 
+             var totalWithdraw = withdrawAmountNumber + currentWithdrawNumber;
+            //  overwriting the previous withdraw value 
+             document.getElementById('current-withdraw').innerText = totalWithdraw;
+            // balancing the balance part 
+            var currentBalance = document.getElementById('current-balance').innerText;
+           var currentBalanceNumber = parseFloat(currentBalance);
+           var totalBalance =  currentBalanceNumber - withdrawAmountNumber ;
+           document.getElementById('current-balance').innerText = totalBalance;
+            // cleaning the input field 
+             document.getElementById('withdraw-amount').value = '';
+
+           })
+
+            
+      
+       </script>
 </body>
 </html>
